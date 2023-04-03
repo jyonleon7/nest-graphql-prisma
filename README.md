@@ -1,1 +1,1 @@
-# project-hapi-nest-graphql-prisma
+# nest-graphql-prisma
