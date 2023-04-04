@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Task {
+  """ID"""
+  id: Int!
+  name: String!
+  dueDate: String!
+  status: String!
+  description: String
+}
+
+type Query {
+  getTasks: [Task]!
+}
+
+type Mutation {
+  """check"""
+  createTask(createTaskInput: CreateTaskInput!): Task!
+}
+
+input CreateTaskInput {
+  name: String!
+  dueDate: String!
+  description: String!
+}
