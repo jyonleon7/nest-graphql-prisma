@@ -23,5 +23,5 @@ type Mutation {
 input CreateTaskInput {
   name: String!
   dueDate: String!
-  description: String!
+  description: String
 }
