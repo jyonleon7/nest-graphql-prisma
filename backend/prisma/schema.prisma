@@ -5,6 +5,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../src/@generated/prisma-nestjs-graphql"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -13,16 +18,28 @@ datasource db {
 model Task {
   id Int @id @default(autoincrement())
   name String @db.VarChar(40)
-  // 例) 2023-04-01
   dueDate String @db.Char(10)
   status Status @default(YET)
   description String? @db.Text
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
+  userId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Status {
   YET
   PROCCESSING
   DONE
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  email String @unique @db.VarChar(255)
+  /// @HideField()
+  password String @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @updatedAt @db.Timestamp(0)
+  Task Task[]
 }

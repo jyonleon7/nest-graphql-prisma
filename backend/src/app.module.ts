@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TaskModule } from './task/task.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -11,10 +12,11 @@ import { PrismaModule } from './prisma/prisma.module';
       driver: ApolloDriver,
       playground: true,
       // コードファーストで開発を進める場合に、nest で自動生成されるgraphqlのスキーマの出力先を指定
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'src/@generated/graphql/schema.gql'),
     }),
     TaskModule,
     PrismaModule,
+    UserModule,
   ],
 })
 export class AppModule {}
